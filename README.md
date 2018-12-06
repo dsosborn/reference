@@ -1,2 +1,2 @@
 # reference
-Useful bits of code to reference
+Useful snippet of code to reference
