@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+<h1>Filter GTM JSON export by Folder</h1>
+
+
+  <section>
+    <h2>Enter GTM Container Export JSON:</h2>
+
+<textarea name="name" rows="8" cols="80" id="original" ></textarea>
+<br>
+<input id="filteringFolder" type="text" name="" value="181" placeholder="Enter Folder ID">
+<button id="filterBtn" type="button" name="button">Filter</button>
+</section>
+
+
+<section>
+  <h2>New json:</h2>
+<textarea name="name" rows="8" cols="80" id="new" ></textarea>
+
+  </section>
+
+
+<script type="text/javascript">
+
+//heyllo
+document.getElementById("filterBtn").addEventListener("click", filterGtm);
+
+function filterGtm() {
+  var folderId = document.getElementById("filteringFolder").value;
+  var originalExport = document.getElementById("original").value;
+  var newExport = JSON.parse(originalExport);
+  newExport.containerVersion.tag = newExport.containerVersion.tag.filter(tag => tag.parentFolderId == folderId);
+  newExport.containerVersion.trigger = newExport.containerVersion.trigger.filter(trigger => trigger.parentFolderId == folderId);
+  newExport.containerVersion.variable = newExport.containerVersion.variable.filter(ari => ari.parentFolderId == folderId);
+  newExport.containerVersion.folder = newExport.containerVersion.folder.filter(fold => fold.folderId == folderId);
+  newExport.containerVersion.builtInVariable = [];
+  console.dir(newExport);
+  newExport = JSON.stringify(newExport);
+  document.getElementById("new").value = newExport;
+}
+</script>
+</body>
+
+</html>
